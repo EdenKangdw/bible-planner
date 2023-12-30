@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  bible-planner-server:
+    image: bible-planner:latest
+    container_name: bible-planner
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    networks:
+      - my_network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD:  123456
+      MYSQL_DATABASE: biblePlanner
+      MYSQL_USER: planner 
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - my_network
+
+volumes:
+  mysql_data:
+
+networks:
+  my_network:
+    driver: bridge
