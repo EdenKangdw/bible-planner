@@ -74,3 +74,4 @@ with open("bible_books.json", "w") as json_file:
     json.dump(bible_books, json_file, indent=2, ensure_ascii=False)
 
 print("bible_books.json 파일이 생성되었습니다.")
+
