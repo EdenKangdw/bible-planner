@@ -4,12 +4,15 @@ services:
   bible-planner-server:
     image: bible-planner:latest
     container_name: bible-planner
+    volumes:
+      - ./app:/app
     ports:
       - "8000:8000"
     depends_on:
       - mysql
     networks:
       - my_network
+    entrypoint: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
   mysql:
     image: mysql:latest

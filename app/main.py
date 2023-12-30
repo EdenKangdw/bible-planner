@@ -15,4 +15,8 @@ logger.setLevel(logging.INFO)
 @app.get('/plan')
 def plan(request: PlanRequestModel):
     logger.info('start request')
-    
+
+# book of bible list
+@app.get('/bible/list')
+def bible_list():
+    return "BOOBKE"
