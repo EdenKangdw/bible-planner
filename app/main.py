@@ -40,7 +40,7 @@ def get_total_chapters(book_name: str) -> int:
     return book_info["chapters"] if book_info else 0
 
 @app.get("/bible/index")
-def get_chapter_index(book: str = Query(..., title="Book Name", description="The name of the book"), chapter: int = Query(..., title="Chapter Number", description="The chapter number")):
+def get_bible_index(book: str = Query(..., title="Book Name", description="The name of the book"), chapter: int = Query(..., title="Chapter Number", description="The chapter number")):
     """
     Get the total chapter number of a specific book and the overall chapter number.
     """
@@ -65,3 +65,20 @@ def get_chapter_index(book: str = Query(..., title="Book Name", description="The
             return {"error": "Invalid chapter number. Please provide a valid chapter number."}
     else:
         return {"error": "Book not found. Please provide a valid book name."}
+
+@app.get('/bible/list')
+def get_bible_list():
+    return [book["name"] for book in bible_books]
+
+@app.post('/blbie/plan')
+def post_bible_plan(params: PlanRequestModel):
+    # init 
+    
+    print(params)
+    start_book = params.get(start_book, '창세기')
+    start_chapter = start_chapter.get(start_chapter, 1)
+    end_book = end_book.get(end_book, '요한계시록')
+    end_chapter = end_chapter.get(end_chapter, 22)
+    
+    start_bible_idx = get_bible_index(start_book, start_book_chapter)
+    end_bible_idx = get_bible_index(end_book, end_book_chapter)
